@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_920f289119de20d5df60680239a5cea0 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+<div style="position: fixed;
+bottom: 50px; right: 50px;
+border:2px solid grey; z-index:9999; font-size:14px;
+background-color:white; padding:10px;
+border-radius:5px;
+">
+<p><strong>Retailer Concentration (2024)</strong></p>
+<div style="display: flex; align-items: center; margin-bottom: 5px;">
+<div style="background-color:green; width:20px; height:20px; margin-right:5px;"></div>
+Low Concentration (CR4 ≤ 40%)
+</div>
+<div style="display: flex; align-items: center; margin-bottom: 5px;">
+<div style="background-color:orange; width:20px; height:20px; margin-right:5px;"></div>
+Medium Concentration (40% < CR4 ≤ 60%)
+</div>
+<div style="display: flex; align-items: center;">
+<div style="background-color:red; width:20px; height:20px; margin-right:5px;"></div>
+High Concentration (CR4 > 60%)
+</div>
+</div>
+    
+<div style="position: fixed; 
+    top: 10px; left: 50%; transform: translateX(-50%);
+    z-index:9999; font-size:18px; font-weight: bold;
+    background-color:white; padding:10px;
+    border-radius:5px; border:2px solid grey;">
+    Retailer Concentration in Canadian Cities (2024)
+</div>
+    
+            <div class="folium-map" id="map_920f289119de20d5df60680239a5cea0" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_920f289119de20d5df60680239a5cea0 = L.map(
+                "map_920f289119de20d5df60680239a5cea0",
+                {
+                    center: [56.1304, -106.3468],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 4,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_59f5ee3a666922504b62e5dca7eeb01d = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_59f5ee3a666922504b62e5dca7eeb01d.addTo(map_920f289119de20d5df60680239a5cea0);
+        
+    
+            var feature_group_632b5a8505ece3e2354911631c1a9161 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var polygon_585ab35c0f780daee51dd07a85242f48 = L.polygon(
+                [[51.445585, -114.604161], [51.445105, -113.380415], [51.241868, -113.376705], [51.125153, -113.632838], [50.794707, -113.606159], [50.921358, -114.209826], [50.921232, -114.652855], [51.155679, -114.698424], [51.189116, -114.513046], [51.212104, -114.721386], [51.445652, -114.7047], [51.445585, -114.604161]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(feature_group_632b5a8505ece3e2354911631c1a9161);
+        
+    
+        var popup_16eefc2c0f5a7852b354287fd801b10e = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_b49dad82d8989a17c9016faaae33d826 = $(`<div id="html_b49dad82d8989a17c9016faaae33d826" style="width: 100.0%; height: 100.0%;">     <strong>Calgary, Alberta</strong><br>     Province: Alberta<br>     Concentration Level: Medium<br>     CR4: 47.6%<br>     HHI: 842<br>     Year: 2024<br>     Population: 1,778,881<br></div>`)[0];
+                popup_16eefc2c0f5a7852b354287fd801b10e.setContent(html_b49dad82d8989a17c9016faaae33d826);
+            
+        
+
+        polygon_585ab35c0f780daee51dd07a85242f48.bindPopup(popup_16eefc2c0f5a7852b354287fd801b10e)
+        ;
+
+        
+    
+    
+            var marker_19791c922ff13d7beb9b25f7e5f162e0 = L.marker(
+                [51.195262, -114.22539],
+                {
+}
+            ).addTo(feature_group_632b5a8505ece3e2354911631c1a9161);
+        
+    
+            var div_icon_642ff7f1e4fd9729c200ad44f8806807 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 10pt; color: black; background-color: white; border: 1px solid orange; border-radius: 8px; padding: 2px; text-align: center; font-weight: bold; opacity: 0.9;\"\u003e47.6%\u003c/div\u003e",
+  "iconSize": [90, 30],
+  "iconAnchor": [45, 15],
+  "className": "empty",
+});
+            marker_19791c922ff13d7beb9b25f7e5f162e0.setIcon(div_icon_642ff7f1e4fd9729c200ad44f8806807);
+        
+    
+                marker_19791c922ff13d7beb9b25f7e5f162e0.setIcon(div_icon_642ff7f1e4fd9729c200ad44f8806807);
+            
+    
+            var polygon_c4fa266f5d5f31a5f69d54b369faefb5 = L.polygon(
+                [[53.992684, -113.693969], [53.977818, -112.843737], [53.893397, -112.951389], [53.702095, -112.876763], [53.483128, -112.95138], [53.460421, -112.852883], [53.366942, -112.840761], [53.363999, -113.04987], [53.29414, -113.0], [53.235946, -113.171757], [53.119757, -113.171697], [53.13419, -114.001849], [53.045137, -114.047436], [53.061911, -114.363613], [53.319701, -114.568681], [53.374318, -115.113212], [53.715685, -114.887248], [53.71639, -114.81254], [53.59922, -114.802279], [53.599292, -114.123082], [53.657486, -114.124002], [53.657566, -114.02647], [53.926735, -114.051452], [53.904815, -113.868066], [53.992684, -113.693969]],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(feature_group_632b5a8505ece3e2354911631c1a9161);
+        
+    
+        var popup_855589338618d32bb2c2027a8466386c = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_78d346656476ef1831a462ea6d98066a = $(`<div id="html_78d346656476ef1831a462ea6d98066a" style="width: 100.0%; height: 100.0%;">     <strong>Edmonton, Alberta</strong><br>     Province: Alberta<br>     Concentration Level: High<br>     CR4: 62.4%<br>     HHI: 1229<br>     Year: 2024<br>     Population: 1,631,614<br></div>`)[0];
+                popup_855589338618d32bb2c2027a8466386c.setContent(html_78d346656476ef1831a462ea6d98066a);
+            
+        
+
+        polygon_c4fa266f5d5f31a5f69d54b369faefb5.bindPopup(popup_855589338618d32bb2c2027a8466386c)
+        ;
+
+        
+    
+    
+            var marker_846e2a709a06a0fa9b0429792c1154e2 = L.marker(
+                [53.543818, -113.755524],
+                {
+}
+            ).addTo(feature_group_632b5a8505ece3e2354911631c1a9161);
+        
+    
+            var div_icon_6f133eec21309afb28979a21a223a51a = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 10pt; color: black; background-color: white; border: 1px solid red; border-radius: 8px; padding: 2px; text-align: center; font-weight: bold; opacity: 0.9;\"\u003e62.4%\u003c/div\u003e",
+  "iconSize": [90, 30],
+  "iconAnchor": [45, 15],
+  "className": "empty",
+});
+            marker_846e2a709a06a0fa9b0429792c1154e2.setIcon(div_icon_6f133eec21309afb28979a21a223a51a);
+        
+    
+                marker_846e2a709a06a0fa9b0429792c1154e2.setIcon(div_icon_6f133eec21309afb28979a21a223a51a);
+            
+    
+            var polygon_a80273f90d7224c0abbfd117fcdfba5e = L.polygon(
+                [[50.688225, -104.454732], [50.717565, -104.478544], [50.746468, -104.223851], [50.396854, -104.205445], [50.39686, -104.068081], [50.047133, -104.053821], [50.047078, -104.463398], [50.309505, -104.480182], [50.309474, -105.305452], [50.571541, -105.305669], [50.57157, -105.05537], [50.804582, -105.040349], [50.699086, -104.791846], [50.819204, -104.501296], [50.659122, -104.500772], [50.688225, -104.454732]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(feature_group_632b5a8505ece3e2354911631c1a9161);
+        
+    
+        var popup_a2684b5b58f8380ac672788aa8c6def5 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_f8c35997bebc13d7004dd4501f224fae = $(`<div id="html_f8c35997bebc13d7004dd4501f224fae" style="width: 100.0%; height: 100.0%;">     <strong>Regina, Saskatchewan</strong><br>     Province: Saskatchewan<br>     Concentration Level: Medium<br>     CR4: 55.3%<br>     HHI: 1094<br>     Year: 2024<br>     Population: 282,032<br></div>`)[0];
+                popup_a2684b5b58f8380ac672788aa8c6def5.setContent(html_f8c35997bebc13d7004dd4501f224fae);
+            
+        
+
+        polygon_a80273f90d7224c0abbfd117fcdfba5e.bindPopup(popup_a2684b5b58f8380ac672788aa8c6def5)
+        ;
+
+        
+    
+    
+            var marker_e9d3c28fa70e88cc8f79957005c107a8 = L.marker(
+                [50.529531, -104.586471],
+                {
+}
+            ).addTo(feature_group_632b5a8505ece3e2354911631c1a9161);
+        
+    
+            var div_icon_05b4fa4736baeff5d1bd18d62dd45dba = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 10pt; color: black; background-color: white; border: 1px solid orange; border-radius: 8px; padding: 2px; text-align: center; font-weight: bold; opacity: 0.9;\"\u003e55.3%\u003c/div\u003e",
+  "iconSize": [90, 30],
+  "iconAnchor": [45, 15],
+  "className": "empty",
+});
+            marker_e9d3c28fa70e88cc8f79957005c107a8.setIcon(div_icon_05b4fa4736baeff5d1bd18d62dd45dba);
+        
+    
+                marker_e9d3c28fa70e88cc8f79957005c107a8.setIcon(div_icon_05b4fa4736baeff5d1bd18d62dd45dba);
+            
+    
+            var polygon_1c7c2983f28536301241812378538440 = L.polygon(
+                [[52.517788, -106.148059], [52.143831, -106.146938], [52.143828, -105.717333], [51.881661, -105.688084], [51.881677, -106.287926], [51.707095, -106.287593], [51.707015, -106.500201], [51.707063, -106.82218], [51.881586, -106.754575], [51.881692, -107.279612], [52.351585, -107.299432], [52.435056, -106.344039], [52.580216, -106.147808], [52.517788, -106.148059]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(feature_group_632b5a8505ece3e2354911631c1a9161);
+        
+    
+        var popup_3e6a0c3163ee05a80e550e54ad6e7c11 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_66f2ee04ce3125b10779528431553ca4 = $(`<div id="html_66f2ee04ce3125b10779528431553ca4" style="width: 100.0%; height: 100.0%;">     <strong>Saskatoon, Saskatchewan</strong><br>     Province: Saskatchewan<br>     Concentration Level: Medium<br>     CR4: 54.2%<br>     HHI: 1059<br>     Year: 2024<br>     Population: 367,336<br></div>`)[0];
+                popup_3e6a0c3163ee05a80e550e54ad6e7c11.setContent(html_66f2ee04ce3125b10779528431553ca4);
+            
+        
+
+        polygon_1c7c2983f28536301241812378538440.bindPopup(popup_3e6a0c3163ee05a80e550e54ad6e7c11)
+        ;
+
+        
+    
+    
+            var marker_5290beb2e60c93cf84f8680187ebea2c = L.marker(
+                [52.095563, -106.397989],
+                {
+}
+            ).addTo(feature_group_632b5a8505ece3e2354911631c1a9161);
+        
+    
+            var div_icon_232004ed74627d46e5a7f225037f041c = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 10pt; color: black; background-color: white; border: 1px solid orange; border-radius: 8px; padding: 2px; text-align: center; font-weight: bold; opacity: 0.9;\"\u003e54.2%\u003c/div\u003e",
+  "iconSize": [90, 30],
+  "iconAnchor": [45, 15],
+  "className": "empty",
+});
+            marker_5290beb2e60c93cf84f8680187ebea2c.setIcon(div_icon_232004ed74627d46e5a7f225037f041c);
+        
+    
+                marker_5290beb2e60c93cf84f8680187ebea2c.setIcon(div_icon_232004ed74627d46e5a7f225037f041c);
+            
+    
+            var polygon_6571b60203edb594b1fb006ac9bf2652 = L.polygon(
+                [[48.735593, -88.548763], [48.644827, -88.533912], [48.565283, -88.636216], [48.466512, -89.166545], [48.399328, -89.195598], [48.399413, -89.044562], [48.267486, -89.110044], [48.246836, -89.0], [48.113221, -89.0], [47.974083, -89.337417], [48.010376, -89.70939], [48.552575, -89.763624], [48.514594, -89.182609], [48.603496, -89.187457], [48.605723, -88.800455], [48.737649, -88.779208], [48.735593, -88.548763]],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(feature_group_632b5a8505ece3e2354911631c1a9161);
+        
+    
+        var popup_195b9686f79ed58e40547940e384b0d0 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_d81b2ff3ee992770d8b4d32e4c6653ea = $(`<div id="html_d81b2ff3ee992770d8b4d32e4c6653ea" style="width: 100.0%; height: 100.0%;">     <strong>Thunder Bay, Ontario</strong><br>     Province: Ontario<br>     Concentration Level: High<br>     CR4: 61.5%<br>     HHI: 1361<br>     Year: 2024<br>     Population: 133,063<br></div>`)[0];
+                popup_195b9686f79ed58e40547940e384b0d0.setContent(html_d81b2ff3ee992770d8b4d32e4c6653ea);
+            
+        
+
+        polygon_6571b60203edb594b1fb006ac9bf2652.bindPopup(popup_195b9686f79ed58e40547940e384b0d0)
+        ;
+
+        
+    
+    
+            var marker_841e115d282a6e5afa60043dea40dcc9 = L.marker(
+                [48.445446, -89.032033],
+                {
+}
+            ).addTo(feature_group_632b5a8505ece3e2354911631c1a9161);
+        
+    
+            var div_icon_6e1b59bc7aafd3090489435b9ec3e8d0 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 10pt; color: black; background-color: white; border: 1px solid red; border-radius: 8px; padding: 2px; text-align: center; font-weight: bold; opacity: 0.9;\"\u003e61.5%\u003c/div\u003e",
+  "iconSize": [90, 30],
+  "iconAnchor": [45, 15],
+  "className": "empty",
+});
+            marker_841e115d282a6e5afa60043dea40dcc9.setIcon(div_icon_6e1b59bc7aafd3090489435b9ec3e8d0);
+        
+    
+                marker_841e115d282a6e5afa60043dea40dcc9.setIcon(div_icon_6e1b59bc7aafd3090489435b9ec3e8d0);
+            
+    
+            var polygon_b61c0791bac5ee163bc1a801f2e6e617 = L.polygon(
+                [[49.548318, -122.959897], [49.541702, -122.608144], [49.462347, -122.526839], [49.353125, -122.603295], [49.352979, -122.409967], [49.002256, -122.459155], [49.002784, -123.357122], [49.205267, -123.488199], [49.312338, -123.738378], [49.307178, -123.474545], [49.481103, -123.274869], [49.548318, -122.959897]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(feature_group_632b5a8505ece3e2354911631c1a9161);
+        
+    
+        var popup_58bf475c6c6e6f4b8fa6918230c9547a = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_7af21a774e2cad0e5c51f6ca8a5789b0 = $(`<div id="html_7af21a774e2cad0e5c51f6ca8a5789b0" style="width: 100.0%; height: 100.0%;">     <strong>Vancouver, British Columbia</strong><br>     Province: British Columbia<br>     Concentration Level: Medium<br>     CR4: 41.7%<br>     HHI: 578<br>     Year: 2024<br>     Population: 3,108,941<br></div>`)[0];
+                popup_58bf475c6c6e6f4b8fa6918230c9547a.setContent(html_7af21a774e2cad0e5c51f6ca8a5789b0);
+            
+        
+
+        polygon_b61c0791bac5ee163bc1a801f2e6e617.bindPopup(popup_58bf475c6c6e6f4b8fa6918230c9547a)
+        ;
+
+        
+    
+    
+            var marker_b7e8a5f2fb69ab8a065035bcbe9d11b9 = L.marker(
+                [49.343143, -122.988359],
+                {
+}
+            ).addTo(feature_group_632b5a8505ece3e2354911631c1a9161);
+        
+    
+            var div_icon_06a2b7687309b338dd6f47728dd5de68 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 10pt; color: black; background-color: white; border: 1px solid orange; border-radius: 8px; padding: 2px; text-align: center; font-weight: bold; opacity: 0.9;\"\u003e41.7%\u003c/div\u003e",
+  "iconSize": [90, 30],
+  "iconAnchor": [45, 15],
+  "className": "empty",
+});
+            marker_b7e8a5f2fb69ab8a065035bcbe9d11b9.setIcon(div_icon_06a2b7687309b338dd6f47728dd5de68);
+        
+    
+                marker_b7e8a5f2fb69ab8a065035bcbe9d11b9.setIcon(div_icon_06a2b7687309b338dd6f47728dd5de68);
+            
+    
+            var polygon_c6be8e896a22c066f06f084ac10cfff4 = L.polygon(
+                [[48.690547, -123.400638], [48.513647, -123.360731], [48.423118, -123.113809], [48.25, -123.25], [48.252836, -123.755679], [48.343791, -124.132037], [48.43069, -124.05146], [48.418939, -123.744944], [48.500806, -123.750658], [48.535694, -123.544944], [48.654495, -123.447254], [48.691386, -123.489137], [48.690547, -123.400638]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(feature_group_632b5a8505ece3e2354911631c1a9161);
+        
+    
+        var popup_e85e5959b27e31eef8d781dc156b26a4 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_e1393556318e9b03147315df099f7d75 = $(`<div id="html_e1393556318e9b03147315df099f7d75" style="width: 100.0%; height: 100.0%;">     <strong>Victoria, British Columbia</strong><br>     Province: British Columbia<br>     Concentration Level: Medium<br>     CR4: 43.5%<br>     HHI: 760<br>     Year: 2024<br>     Population: 441,491<br></div>`)[0];
+                popup_e85e5959b27e31eef8d781dc156b26a4.setContent(html_e1393556318e9b03147315df099f7d75);
+            
+        
+
+        polygon_c6be8e896a22c066f06f084ac10cfff4.bindPopup(popup_e85e5959b27e31eef8d781dc156b26a4)
+        ;
+
+        
+    
+    
+            var marker_0161de28f49965bf855c01b2c9564745 = L.marker(
+                [48.492038, -123.572456],
+                {
+}
+            ).addTo(feature_group_632b5a8505ece3e2354911631c1a9161);
+        
+    
+            var div_icon_4766c47bca345e0ccc0ef2f4b8bdf9c1 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 10pt; color: black; background-color: white; border: 1px solid orange; border-radius: 8px; padding: 2px; text-align: center; font-weight: bold; opacity: 0.9;\"\u003e43.5%\u003c/div\u003e",
+  "iconSize": [90, 30],
+  "iconAnchor": [45, 15],
+  "className": "empty",
+});
+            marker_0161de28f49965bf855c01b2c9564745.setIcon(div_icon_4766c47bca345e0ccc0ef2f4b8bdf9c1);
+        
+    
+                marker_0161de28f49965bf855c01b2c9564745.setIcon(div_icon_4766c47bca345e0ccc0ef2f4b8bdf9c1);
+            
+    
+            var polygon_7215c1cce8a0b38c3111375ab2460ea0 = L.polygon(
+                [[61.240107, -134.957735], [61.137717, -134.731947], [60.938928, -134.656421], [60.511673, -133.88279], [60.290894, -134.419564], [60.193604, -134.986138], [60.000013, -134.986228], [60.000059, -135.598022], [60.55604, -135.486103], [60.814645, -136.02363], [61.018334, -135.902446], [61.231329, -135.550578], [61.240107, -134.957735]],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(feature_group_632b5a8505ece3e2354911631c1a9161);
+        
+    
+        var popup_c5578f7dcd7940f5c28124e96c0f9cbd = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_2b778eedab346d474fbcfc14573e9925 = $(`<div id="html_2b778eedab346d474fbcfc14573e9925" style="width: 100.0%; height: 100.0%;">     <strong>Whitehorse, Yukon</strong><br>     Province: Yukon<br>     Concentration Level: High<br>     CR4: 71.4%<br>     HHI: 1837<br>     Year: 2024<br>     Population: 38,000<br></div>`)[0];
+                popup_c5578f7dcd7940f5c28124e96c0f9cbd.setContent(html_2b778eedab346d474fbcfc14573e9925);
+            
+        
+
+        polygon_7215c1cce8a0b38c3111375ab2460ea0.bindPopup(popup_c5578f7dcd7940f5c28124e96c0f9cbd)
+        ;
+
+        
+    
+    
+            var marker_dbecfe8d6a677dde8ba88c6f4632a693 = L.marker(
+                [60.70565, -135.087641],
+                {
+}
+            ).addTo(feature_group_632b5a8505ece3e2354911631c1a9161);
+        
+    
+            var div_icon_5e0aff749b78067badf3c9f653558498 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 10pt; color: black; background-color: white; border: 1px solid red; border-radius: 8px; padding: 2px; text-align: center; font-weight: bold; opacity: 0.9;\"\u003e71.4%\u003c/div\u003e",
+  "iconSize": [90, 30],
+  "iconAnchor": [45, 15],
+  "className": "empty",
+});
+            marker_dbecfe8d6a677dde8ba88c6f4632a693.setIcon(div_icon_5e0aff749b78067badf3c9f653558498);
+        
+    
+                marker_dbecfe8d6a677dde8ba88c6f4632a693.setIcon(div_icon_5e0aff749b78067badf3c9f653558498);
+            
+    
+            var polygon_012ff9f0d3dd6dc12c5702af10f42c29 = L.polygon(
+                [[50.545119, -96.599955], [50.282707, -96.352955], [50.283652, -96.628256], [50.069446, -96.71661], [50.061962, -96.635535], [49.973243, -96.636512], [49.972946, -96.360979], [49.707271, -96.367173], [49.708512, -96.775857], [49.619438, -96.775498], [49.620679, -97.048811], [49.531674, -97.048633], [49.532393, -97.732456], [49.798444, -97.732333], [49.798145, -97.459062], [49.87163, -97.447853], [50.076801, -97.947371], [50.033054, -97.006617], [50.128858, -96.855607], [50.400455, -96.872714], [50.396147, -96.651419], [50.451252, -96.572772], [50.545119, -96.599955]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(feature_group_632b5a8505ece3e2354911631c1a9161);
+        
+    
+        var popup_0f5cef6aad8c8624f1e1235ddc87fb5a = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_00bac3389176b77f0c3e3a0c773892b5 = $(`<div id="html_00bac3389176b77f0c3e3a0c773892b5" style="width: 100.0%; height: 100.0%;">     <strong>Winnipeg, Manitoba</strong><br>     Province: Manitoba<br>     Concentration Level: Medium<br>     CR4: 49.1%<br>     HHI: 1143<br>     Year: 2024<br>     Population: 941,641<br></div>`)[0];
+                popup_0f5cef6aad8c8624f1e1235ddc87fb5a.setContent(html_00bac3389176b77f0c3e3a0c773892b5);
+            
+        
+
+        polygon_012ff9f0d3dd6dc12c5702af10f42c29.bindPopup(popup_0f5cef6aad8c8624f1e1235ddc87fb5a)
+        ;
+
+        
+    
+    
+            var marker_82b76ba88008468beb754a8da2b675ec = L.marker(
+                [50.01778, -96.905432],
+                {
+}
+            ).addTo(feature_group_632b5a8505ece3e2354911631c1a9161);
+        
+    
+            var div_icon_6b14efa474895527f566bed2aa4b584e = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 10pt; color: black; background-color: white; border: 1px solid orange; border-radius: 8px; padding: 2px; text-align: center; font-weight: bold; opacity: 0.9;\"\u003e49.1%\u003c/div\u003e",
+  "iconSize": [90, 30],
+  "iconAnchor": [45, 15],
+  "className": "empty",
+});
+            marker_82b76ba88008468beb754a8da2b675ec.setIcon(div_icon_6b14efa474895527f566bed2aa4b584e);
+        
+    
+                marker_82b76ba88008468beb754a8da2b675ec.setIcon(div_icon_6b14efa474895527f566bed2aa4b584e);
+            
+    
+            feature_group_632b5a8505ece3e2354911631c1a9161.addTo(map_920f289119de20d5df60680239a5cea0);
+        
+    
+            var feature_group_c008b1a3aa333e044479e56001b830ea = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var polygon_e7d3babf68e2522af9cb918cc12eea8a = L.polygon(
+                [[46.410878, -62.815875], [46.282599, -62.743371], [46.270546, -62.920711], [46.150219, -62.998123], [46.236888, -62.977432], [46.206406, -63.055105], [46.015205, -63.146209], [46.068211, -63.3307], [46.266294, -63.403076], [46.301534, -63.359945], [46.272726, -63.27864], [46.294106, -63.236645], [46.400659, -63.494459], [46.486615, -63.250906], [46.410878, -62.815875]],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(feature_group_c008b1a3aa333e044479e56001b830ea);
+        
+    
+        var popup_cbdb4f5e31722ec73d73d59dac83bdf5 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_2c46f7753b356799b4527960894320f8 = $(`<div id="html_2c46f7753b356799b4527960894320f8" style="width: 100.0%; height: 100.0%;">     <strong>Charlottetown and Summerside, Prince Edward Island</strong><br>     Province: Prince Edward Island<br>     Concentration Level: High<br>     CR4: 90.9%<br>     HHI: 2893<br>     Year: 2024<br>     Population: 114,266<br></div>`)[0];
+                popup_cbdb4f5e31722ec73d73d59dac83bdf5.setContent(html_2c46f7753b356799b4527960894320f8);
+            
+        
+
+        polygon_e7d3babf68e2522af9cb918cc12eea8a.bindPopup(popup_cbdb4f5e31722ec73d73d59dac83bdf5)
+        ;
+
+        
+    
+    
+            var marker_fea0c7f19b16dfba07fbf4fb8aa47a01 = L.marker(
+                [46.271584, -63.121805],
+                {
+}
+            ).addTo(feature_group_c008b1a3aa333e044479e56001b830ea);
+        
+    
+            var div_icon_8025feba08885a727d13da9fa7c8a9a3 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 10pt; color: black; background-color: white; border: 1px solid red; border-radius: 8px; padding: 2px; text-align: center; font-weight: bold; opacity: 0.9;\"\u003e90.9%\u003c/div\u003e",
+  "iconSize": [90, 30],
+  "iconAnchor": [45, 15],
+  "className": "empty",
+});
+            marker_fea0c7f19b16dfba07fbf4fb8aa47a01.setIcon(div_icon_8025feba08885a727d13da9fa7c8a9a3);
+        
+    
+                marker_fea0c7f19b16dfba07fbf4fb8aa47a01.setIcon(div_icon_8025feba08885a727d13da9fa7c8a9a3);
+            
+    
+            var polygon_18e96c83bc41b44193b2ae9f11c8bf09 = L.polygon(
+                [[44.5728609, -64.0103622], [44.6354368, -64.2810296], [44.7233202, -64.0474796], [44.7330768, -64.0474411], [44.9356407, -63.9623754], [44.9395292, -63.9485179], [45.2265462, -64.1738429], [45.3521452, -63.5583209], [45.0444187, -63.4044404], [45.4370083, -62.3968506], [44.937585, -61.5179443], [44.53959, -63.3416748], [44.3474223, -63.5668945], [44.370987, -63.8580322], [44.3749135, -63.8635254], [44.5709043, -63.9953613], [44.5709043, -63.9898682], [44.5728609, -64.0103622]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(feature_group_c008b1a3aa333e044479e56001b830ea);
+        
+    
+        var popup_c5500fe4f199aa2d317ba70a72ae0bd0 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_8568bc5e6b3865c584f2d29be8af89e7 = $(`<div id="html_8568bc5e6b3865c584f2d29be8af89e7" style="width: 100.0%; height: 100.0%;">     <strong>Halifax, Nova Scotia</strong><br>     Province: Nova Scotia<br>     Concentration Level: Medium<br>     CR4: 57.1%<br>     HHI: 1400<br>     Year: 2024<br>     Population: 530,167<br></div>`)[0];
+                popup_c5500fe4f199aa2d317ba70a72ae0bd0.setContent(html_8568bc5e6b3865c584f2d29be8af89e7);
+            
+        
+
+        polygon_18e96c83bc41b44193b2ae9f11c8bf09.bindPopup(popup_c5500fe4f199aa2d317ba70a72ae0bd0)
+        ;
+
+        
+    
+    
+            var marker_e76e8417075f81507cc0390642522b56 = L.marker(
+                [44.8040068, -63.6595109],
+                {
+}
+            ).addTo(feature_group_c008b1a3aa333e044479e56001b830ea);
+        
+    
+            var div_icon_9fabf4a18ee6ec8f68d6e66727ef2f5c = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 10pt; color: black; background-color: white; border: 1px solid orange; border-radius: 8px; padding: 2px; text-align: center; font-weight: bold; opacity: 0.9;\"\u003e57.1%\u003c/div\u003e",
+  "iconSize": [90, 30],
+  "iconAnchor": [45, 15],
+  "className": "empty",
+});
+            marker_e76e8417075f81507cc0390642522b56.setIcon(div_icon_9fabf4a18ee6ec8f68d6e66727ef2f5c);
+        
+    
+                marker_e76e8417075f81507cc0390642522b56.setIcon(div_icon_9fabf4a18ee6ec8f68d6e66727ef2f5c);
+            
+    
+            var polygon_4dcaf59dd76ecd7cee60efb959d02c71 = L.polygon(
+                [[45.948676, -73.32297], [45.892226, -73.240442], [45.813628, -73.308807], [45.654537, -73.268163], [45.589228, -73.130197], [45.51068, -73.196371], [45.25354, -73.190749], [45.254876, -73.411444], [45.328904, -73.408428], [45.314696, -73.633996], [45.229005, -73.698212], [45.313736, -73.811289], [45.2415, -73.843571], [45.255981, -73.951245], [45.318569, -73.97608], [45.242757, -74.319544], [45.352428, -74.168903], [45.523267, -74.279882], [45.705076, -74.203912], [45.738786, -74.327969], [45.824053, -74.310119], [45.78079, -74.120067], [45.850461, -74.067746], [45.766051, -73.912021], [45.82084, -73.806775], [45.8854, -73.901604], [45.911966, -73.776026], [45.832691, -73.67376], [45.948676, -73.32297]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(feature_group_c008b1a3aa333e044479e56001b830ea);
+        
+    
+        var popup_4946dcbac917fc0eb70d2b7707802fe8 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_6855e8947bee27a6deca9d8ac1ac70aa = $(`<div id="html_6855e8947bee27a6deca9d8ac1ac70aa" style="width: 100.0%; height: 100.0%;">     <strong>Montréal, Quebec</strong><br>     Province: Quebec<br>     Concentration Level: Medium<br>     CR4: 53.4%<br>     HHI: 895<br>     Year: 2024<br>     Population: 4,615,154<br></div>`)[0];
+                popup_4946dcbac917fc0eb70d2b7707802fe8.setContent(html_6855e8947bee27a6deca9d8ac1ac70aa);
+            
+        
+
+        polygon_4dcaf59dd76ecd7cee60efb959d02c71.bindPopup(popup_4946dcbac917fc0eb70d2b7707802fe8)
+        ;
+
+        
+    
+    
+            var marker_b5626d5e4413927f37d599234346aedd = L.marker(
+                [45.589759, -73.74425],
+                {
+}
+            ).addTo(feature_group_c008b1a3aa333e044479e56001b830ea);
+        
+    
+            var div_icon_10554a1dc74072808275c6bfd9398271 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 10pt; color: black; background-color: white; border: 1px solid orange; border-radius: 8px; padding: 2px; text-align: center; font-weight: bold; opacity: 0.9;\"\u003e53.4%\u003c/div\u003e",
+  "iconSize": [90, 30],
+  "iconAnchor": [45, 15],
+  "className": "empty",
+});
+            marker_b5626d5e4413927f37d599234346aedd.setIcon(div_icon_10554a1dc74072808275c6bfd9398271);
+        
+    
+                marker_b5626d5e4413927f37d599234346aedd.setIcon(div_icon_10554a1dc74072808275c6bfd9398271);
+            
+    
+            var polygon_5d7c96f8d47d044968b039ab5998f0a5 = L.polygon(
+                [[45.57771, -75.177176], [45.410568, -75.07954], [45.357798, -75.267874], [45.239742, -75.201156], [45.084506, -75.594904], [44.956511, -75.485604], [44.845648, -75.695785], [45.072398, -75.953128], [44.983032, -76.095092], [45.419021, -76.642778], [45.516326, -76.497714], [45.456674, -76.324617], [45.518181, -76.140399], [45.372699, -75.817825], [45.57771, -75.177176]],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(feature_group_c008b1a3aa333e044479e56001b830ea);
+        
+    
+        var popup_1cd885a86bc63103a4bea99aa1d8bbbb = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_3469d67fae5a999652ef44261c29755e = $(`<div id="html_3469d67fae5a999652ef44261c29755e" style="width: 100.0%; height: 100.0%;">     <strong>Ottawa-Gatineau, Ontario part, Ontario/Quebec</strong><br>     Province: Ontario<br>     Concentration Level: High<br>     CR4: 75.2%<br>     HHI: 1637<br>     Year: 2024<br>     Population: 1,287,592<br></div>`)[0];
+                popup_1cd885a86bc63103a4bea99aa1d8bbbb.setContent(html_3469d67fae5a999652ef44261c29755e);
+            
+        
+
+        polygon_5d7c96f8d47d044968b039ab5998f0a5.bindPopup(popup_1cd885a86bc63103a4bea99aa1d8bbbb)
+        ;
+
+        
+    
+    
+            var marker_65ad127c65e8b0a71975e3222634892e = L.marker(
+                [45.292568, -75.743385],
+                {
+}
+            ).addTo(feature_group_c008b1a3aa333e044479e56001b830ea);
+        
+    
+            var div_icon_c4ccf41b26cdbf7b9d803c2cd9d809c2 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 10pt; color: black; background-color: white; border: 1px solid red; border-radius: 8px; padding: 2px; text-align: center; font-weight: bold; opacity: 0.9;\"\u003e75.2%\u003c/div\u003e",
+  "iconSize": [90, 30],
+  "iconAnchor": [45, 15],
+  "className": "empty",
+});
+            marker_65ad127c65e8b0a71975e3222634892e.setIcon(div_icon_c4ccf41b26cdbf7b9d803c2cd9d809c2);
+        
+    
+                marker_65ad127c65e8b0a71975e3222634892e.setIcon(div_icon_c4ccf41b26cdbf7b9d803c2cd9d809c2);
+            
+    
+            var polygon_2d6a7b0d147607b0eec0c494d4d43f5f = L.polygon(
+                [[47.159579, -71.257275], [47.142006, -71.071353], [46.999144, -70.952406], [47.035096, -70.690477], [46.865673, -70.966048], [46.821608, -70.92414], [46.759054, -71.031726], [46.699291, -70.947933], [46.535753, -71.192597], [46.608539, -71.384698], [46.561387, -71.562049], [46.721512, -71.711227], [46.784184, -71.553104], [46.853987, -71.71476], [46.98693, -71.632712], [47.112259, -71.814619], [47.307313, -71.41258], [47.159579, -71.257275]],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(feature_group_c008b1a3aa333e044479e56001b830ea);
+        
+    
+        var popup_4154e1e24e95b4cd9cd8f691409bbdab = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_fe0529d0a92e73e5846970549edbd662 = $(`<div id="html_fe0529d0a92e73e5846970549edbd662" style="width: 100.0%; height: 100.0%;">     <strong>Québec, Quebec</strong><br>     Province: Quebec<br>     Concentration Level: High<br>     CR4: 72.6%<br>     HHI: 1684<br>     Year: 2024<br>     Population: 900,343<br></div>`)[0];
+                popup_4154e1e24e95b4cd9cd8f691409bbdab.setContent(html_fe0529d0a92e73e5846970549edbd662);
+            
+        
+
+        polygon_2d6a7b0d147607b0eec0c494d4d43f5f.bindPopup(popup_4154e1e24e95b4cd9cd8f691409bbdab)
+        ;
+
+        
+    
+    
+            var marker_b7172c15df56712e397a48034c2a111f = L.marker(
+                [46.895161, -71.282054],
+                {
+}
+            ).addTo(feature_group_c008b1a3aa333e044479e56001b830ea);
+        
+    
+            var div_icon_2cbed833665b295e734e23531c848468 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 10pt; color: black; background-color: white; border: 1px solid red; border-radius: 8px; padding: 2px; text-align: center; font-weight: bold; opacity: 0.9;\"\u003e72.6%\u003c/div\u003e",
+  "iconSize": [90, 30],
+  "iconAnchor": [45, 15],
+  "className": "empty",
+});
+            marker_b7172c15df56712e397a48034c2a111f.setIcon(div_icon_2cbed833665b295e734e23531c848468);
+        
+    
+                marker_b7172c15df56712e397a48034c2a111f.setIcon(div_icon_2cbed833665b295e734e23531c848468);
+            
+    
+            var polygon_13029c9c690a09e2a9e62241f79544d1 = L.polygon(
+                [[45.477118, -65.229646], [45.289672, -65.50073], [45.211766, -66.091117], [44.972886, -66.558491], [45.312787, -66.593037], [45.312733, -66.459743], [45.497225, -66.460244], [45.4988, -66.563461], [45.692173, -66.395512], [45.522938, -66.166189], [45.658717, -65.751261], [45.589286, -65.590355], [45.48457, -65.551093], [45.61509, -65.119355], [45.51329, -65.076815], [45.477118, -65.229646]],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(feature_group_c008b1a3aa333e044479e56001b830ea);
+        
+    
+        var popup_fdefa6ebd9b46881bd01d8cb14913c38 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_de961326e6d11375b1bb8b28b4f55b50 = $(`<div id="html_de961326e6d11375b1bb8b28b4f55b50" style="width: 100.0%; height: 100.0%;">     <strong>Saint John, New Brunswick</strong><br>     Province: New Brunswick<br>     Concentration Level: High<br>     CR4: 80.5%<br>     HHI: 2553<br>     Year: 2024<br>     Population: 142,433<br></div>`)[0];
+                popup_fdefa6ebd9b46881bd01d8cb14913c38.setContent(html_de961326e6d11375b1bb8b28b4f55b50);
+            
+        
+
+        polygon_13029c9c690a09e2a9e62241f79544d1.bindPopup(popup_fdefa6ebd9b46881bd01d8cb14913c38)
+        ;
+
+        
+    
+    
+            var marker_1be9d9212e7cc2877d1de94d28b03856 = L.marker(
+                [45.445386, -65.896043],
+                {
+}
+            ).addTo(feature_group_c008b1a3aa333e044479e56001b830ea);
+        
+    
+            var div_icon_318fc72a600bc5fadcce51cfb3dcc447 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 10pt; color: black; background-color: white; border: 1px solid red; border-radius: 8px; padding: 2px; text-align: center; font-weight: bold; opacity: 0.9;\"\u003e80.5%\u003c/div\u003e",
+  "iconSize": [90, 30],
+  "iconAnchor": [45, 15],
+  "className": "empty",
+});
+            marker_1be9d9212e7cc2877d1de94d28b03856.setIcon(div_icon_318fc72a600bc5fadcce51cfb3dcc447);
+        
+    
+                marker_1be9d9212e7cc2877d1de94d28b03856.setIcon(div_icon_318fc72a600bc5fadcce51cfb3dcc447);
+            
+    
+            var polygon_fea155b1fe2966a1493c32e306ba0214 = L.polygon(
+                [[47.809609, -52.785427], [47.647657, -52.660157], [47.530579, -52.690211], [47.523294, -52.619366], [47.309092, -52.747482], [47.317185, -52.813717], [47.239341, -52.752703], [47.266778, -52.853723], [47.381079, -52.82829], [47.450269, -53.031699], [47.291174, -53.125468], [47.281568, -53.245295], [47.546558, -52.920419], [47.809609, -52.785427]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(feature_group_c008b1a3aa333e044479e56001b830ea);
+        
+    
+        var popup_544227a92df849e8e5bdd04cc14de01f = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_0619bb12b9122851749a42c38de3d347 = $(`<div id="html_0619bb12b9122851749a42c38de3d347" style="width: 100.0%; height: 100.0%;">     <strong>St. John's, Newfoundland and Labrador</strong><br>     Province: Newfoundland and Labrador<br>     Concentration Level: Medium<br>     CR4: 59.4%<br>     HHI: 1367<br>     Year: 2024<br>     Population: 239,316<br></div>`)[0];
+                popup_544227a92df849e8e5bdd04cc14de01f.setContent(html_0619bb12b9122851749a42c38de3d347);
+            
+        
+
+        polygon_fea155b1fe2966a1493c32e306ba0214.bindPopup(popup_544227a92df849e8e5bdd04cc14de01f)
+        ;
+
+        
+    
+    
+            var marker_665a336eec689b429098ac73bad8aec4 = L.marker(
+                [47.457414, -52.847099],
+                {
+}
+            ).addTo(feature_group_c008b1a3aa333e044479e56001b830ea);
+        
+    
+            var div_icon_a02bebe522150c2b86107e3f12ab25b2 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 10pt; color: black; background-color: white; border: 1px solid orange; border-radius: 8px; padding: 2px; text-align: center; font-weight: bold; opacity: 0.9;\"\u003e59.4%\u003c/div\u003e",
+  "iconSize": [90, 30],
+  "iconAnchor": [45, 15],
+  "className": "empty",
+});
+            marker_665a336eec689b429098ac73bad8aec4.setIcon(div_icon_a02bebe522150c2b86107e3f12ab25b2);
+        
+    
+                marker_665a336eec689b429098ac73bad8aec4.setIcon(div_icon_a02bebe522150c2b86107e3f12ab25b2);
+            
+    
+            var polygon_e2e5951bd0ab61c86aa5d23aa09a1bd4 = L.polygon(
+                [[44.453881, -79.249781], [43.833504, -78.970507], [43.610809, -79.34374], [43.633161, -79.467339], [43.368931, -79.720352], [43.476542, -79.894724], [43.417252, -79.959305], [43.561107, -80.160356], [43.734451, -79.969035], [43.864695, -80.14411], [44.084928, -80.171741], [44.123249, -79.993964], [43.951423, -79.951176], [43.977036, -79.833582], [44.165329, -79.891846], [44.210111, -79.512654], [44.422367, -79.508978], [44.453881, -79.249781]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(feature_group_c008b1a3aa333e044479e56001b830ea);
+        
+    
+        var popup_b615e891662dd9a6dac872f0d6ff3be4 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_c3c99c0c7df6f850f2d8eb3e1c7b004c = $(`<div id="html_c3c99c0c7df6f850f2d8eb3e1c7b004c" style="width: 100.0%; height: 100.0%;">     <strong>Toronto, Ontario</strong><br>     Province: Ontario<br>     Concentration Level: Medium<br>     CR4: 46.7%<br>     HHI: 665<br>     Year: 2024<br>     Population: 7,106,379<br></div>`)[0];
+                popup_b615e891662dd9a6dac872f0d6ff3be4.setContent(html_c3c99c0c7df6f850f2d8eb3e1c7b004c);
+            
+        
+
+        polygon_e2e5951bd0ab61c86aa5d23aa09a1bd4.bindPopup(popup_b615e891662dd9a6dac872f0d6ff3be4)
+        ;
+
+        
+    
+    
+            var marker_fec65756cadd1ce3221afd006b594c07 = L.marker(
+                [43.907925, -79.721832],
+                {
+}
+            ).addTo(feature_group_c008b1a3aa333e044479e56001b830ea);
+        
+    
+            var div_icon_814428535f249e23ac7f418aaf4c7f13 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 10pt; color: black; background-color: white; border: 1px solid orange; border-radius: 8px; padding: 2px; text-align: center; font-weight: bold; opacity: 0.9;\"\u003e46.7%\u003c/div\u003e",
+  "iconSize": [90, 30],
+  "iconAnchor": [45, 15],
+  "className": "empty",
+});
+            marker_fec65756cadd1ce3221afd006b594c07.setIcon(div_icon_814428535f249e23ac7f418aaf4c7f13);
+        
+    
+                marker_fec65756cadd1ce3221afd006b594c07.setIcon(div_icon_814428535f249e23ac7f418aaf4c7f13);
+            
+    
+            feature_group_c008b1a3aa333e044479e56001b830ea.addTo(map_920f289119de20d5df60680239a5cea0);
+        
+    
+            var layer_control_514d45b73ac1588b1f72d5e57e5be55f_layers = {
+                base_layers : {
+                    "cartodbpositron" : tile_layer_59f5ee3a666922504b62e5dca7eeb01d,
+                },
+                overlays :  {
+                    "Western Canada" : feature_group_632b5a8505ece3e2354911631c1a9161,
+                    "Eastern Canada" : feature_group_c008b1a3aa333e044479e56001b830ea,
+                },
+            };
+            let layer_control_514d45b73ac1588b1f72d5e57e5be55f = L.control.layers(
+                layer_control_514d45b73ac1588b1f72d5e57e5be55f_layers.base_layers,
+                layer_control_514d45b73ac1588b1f72d5e57e5be55f_layers.overlays,
+                {
+  "position": "topright",
+  "collapsed": true,
+  "autoZIndex": true,
+}
+            ).addTo(map_920f289119de20d5df60680239a5cea0);
+
+        
+</script>
+</html>
