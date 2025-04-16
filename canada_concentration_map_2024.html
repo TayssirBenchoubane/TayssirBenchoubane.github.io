@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_18fcea7c4acc96fee7219a8acd564625 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+<div style="position: fixed;
+bottom: 50px; right: 50px;
+border:2px solid grey; z-index:9999; font-size:14px;
+background-color:white; padding:10px;
+border-radius:5px;
+">
+<p><strong> Grocery Retailer Concentration (2024)</strong></p>
+<div style="display: flex; align-items: center; margin-bottom: 5px;">
+<div style="background-color:green; width:20px; height:20px; margin-right:5px;"></div>
+Low Concentration (CR4 ≤ 40%)
+</div>
+<div style="display: flex; align-items: center; margin-bottom: 5px;">
+<div style="background-color:orange; width:20px; height:20px; margin-right:5px;"></div>
+Medium Concentration (40% < CR4 ≤ 60%)
+</div>
+<div style="display: flex; align-items: center;">
+<div style="background-color:red; width:20px; height:20px; margin-right:5px;"></div>
+High Concentration (CR4 > 60%)
+</div>
+<div style="margin-top: 10px; font-size: 12px; font-style: italic;">
+Note: Yellowknife data from 2023.
+</div>
+</div>
+    
+<div style="position: fixed; 
+    top: 10px; left: 50%; transform: translateX(-50%);
+    z-index:9999; font-size:18px; font-weight: bold;
+    background-color:white; padding:10px;
+    border-radius:5px; border:2px solid grey;">
+    Grocery Retailer Concentration in Canadian Cities (2024)
+</div>
+    
+            <div class="folium-map" id="map_18fcea7c4acc96fee7219a8acd564625" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_18fcea7c4acc96fee7219a8acd564625 = L.map(
+                "map_18fcea7c4acc96fee7219a8acd564625",
+                {
+                    center: [56.1304, -106.3468],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 4,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_5310c78ec1f3d0e9640bbe88e8659939 = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_5310c78ec1f3d0e9640bbe88e8659939.addTo(map_18fcea7c4acc96fee7219a8acd564625);
+        
+    
+            var feature_group_f8ecc8dc5efc7174fe2696231baa6032 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var polygon_0b50707bf715e9e4e633db0469c9e636 = L.polygon(
+                [[51.445585, -114.604161], [51.445105, -113.380415], [51.241868, -113.376705], [51.125153, -113.632838], [50.794707, -113.606159], [50.921358, -114.209826], [50.921232, -114.652855], [51.155679, -114.698424], [51.189116, -114.513046], [51.212104, -114.721386], [51.445652, -114.7047], [51.445585, -114.604161]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(feature_group_f8ecc8dc5efc7174fe2696231baa6032);
+        
+    
+        var popup_5a49a9368fae80debb631367f86f67d6 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_654dde8d53e62e4f7c3a043b4464698f = $(`<div id="html_654dde8d53e62e4f7c3a043b4464698f" style="width: 100.0%; height: 100.0%;">     <strong>Calgary, Alberta</strong><br>     Concentration Level: Medium<br>     Food CPI: 189.63219<br>     CR4: 47.6%<br>     HHI: 842<br>     Year: 2024<br>     Population: 1,778,881<br></div>`)[0];
+                popup_5a49a9368fae80debb631367f86f67d6.setContent(html_654dde8d53e62e4f7c3a043b4464698f);
+            
+        
+
+        polygon_0b50707bf715e9e4e633db0469c9e636.bindPopup(popup_5a49a9368fae80debb631367f86f67d6)
+        ;
+
+        
+    
+    
+            var marker_897f3932a29e3a2cd095182600211a1a = L.marker(
+                [51.195262, -114.22539],
+                {
+}
+            ).addTo(feature_group_f8ecc8dc5efc7174fe2696231baa6032);
+        
+    
+            var div_icon_3a0e60084a3011bd5491a603fd14c0c2 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 10pt; color: black; background-color: white; border: 1px solid orange; border-radius: 8px; padding: 2px; text-align: center; font-weight: bold; opacity: 0.9;\"\u003e47.6%\u003c/div\u003e",
+  "iconSize": [90, 30],
+  "iconAnchor": [45, 15],
+  "className": "empty",
+});
+            marker_897f3932a29e3a2cd095182600211a1a.setIcon(div_icon_3a0e60084a3011bd5491a603fd14c0c2);
+        
+    
+                marker_897f3932a29e3a2cd095182600211a1a.setIcon(div_icon_3a0e60084a3011bd5491a603fd14c0c2);
+            
+    
+            var polygon_ef9da98c53f2cf6137283fe78d8b6f16 = L.polygon(
+                [[53.992684, -113.693969], [53.977818, -112.843737], [53.893397, -112.951389], [53.702095, -112.876763], [53.483128, -112.95138], [53.460421, -112.852883], [53.366942, -112.840761], [53.363999, -113.04987], [53.29414, -113.0], [53.235946, -113.171757], [53.119757, -113.171697], [53.13419, -114.001849], [53.045137, -114.047436], [53.061911, -114.363613], [53.319701, -114.568681], [53.374318, -115.113212], [53.715685, -114.887248], [53.71639, -114.81254], [53.59922, -114.802279], [53.599292, -114.123082], [53.657486, -114.124002], [53.657566, -114.02647], [53.926735, -114.051452], [53.904815, -113.868066], [53.992684, -113.693969]],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(feature_group_f8ecc8dc5efc7174fe2696231baa6032);
+        
+    
+        var popup_40dded97d99f79dfd30a7eac94ab0a80 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_1372e1132676fca86fe3dfbf0dfd366a = $(`<div id="html_1372e1132676fca86fe3dfbf0dfd366a" style="width: 100.0%; height: 100.0%;">     <strong>Edmonton, Alberta</strong><br>     Concentration Level: High<br>     Food CPI: 184.76949<br>     CR4: 62.4%<br>     HHI: 1229<br>     Year: 2024<br>     Population: 1,631,614<br></div>`)[0];
+                popup_40dded97d99f79dfd30a7eac94ab0a80.setContent(html_1372e1132676fca86fe3dfbf0dfd366a);
+            
+        
+
+        polygon_ef9da98c53f2cf6137283fe78d8b6f16.bindPopup(popup_40dded97d99f79dfd30a7eac94ab0a80)
+        ;
+
+        
+    
+    
+            var marker_25a42d9338883ac47d6545edd7dd9175 = L.marker(
+                [53.543818, -113.755524],
+                {
+}
+            ).addTo(feature_group_f8ecc8dc5efc7174fe2696231baa6032);
+        
+    
+            var div_icon_2fb0f2b1a1f6ca7ca47aa015e633b0b2 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 10pt; color: black; background-color: white; border: 1px solid red; border-radius: 8px; padding: 2px; text-align: center; font-weight: bold; opacity: 0.9;\"\u003e62.4%\u003c/div\u003e",
+  "iconSize": [90, 30],
+  "iconAnchor": [45, 15],
+  "className": "empty",
+});
+            marker_25a42d9338883ac47d6545edd7dd9175.setIcon(div_icon_2fb0f2b1a1f6ca7ca47aa015e633b0b2);
+        
+    
+                marker_25a42d9338883ac47d6545edd7dd9175.setIcon(div_icon_2fb0f2b1a1f6ca7ca47aa015e633b0b2);
+            
+    
+            var polygon_eefaae45580d22336830a5c94e53f3ea = L.polygon(
+                [[50.688225, -104.454732], [50.717565, -104.478544], [50.746468, -104.223851], [50.396854, -104.205445], [50.39686, -104.068081], [50.047133, -104.053821], [50.047078, -104.463398], [50.309505, -104.480182], [50.309474, -105.305452], [50.571541, -105.305669], [50.57157, -105.05537], [50.804582, -105.040349], [50.699086, -104.791846], [50.819204, -104.501296], [50.659122, -104.500772], [50.688225, -104.454732]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(feature_group_f8ecc8dc5efc7174fe2696231baa6032);
+        
+    
+        var popup_6a39d0710098b63ffede856a46f149ea = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_28560b7e0b8574c1e6ca0f8f39632b1c = $(`<div id="html_28560b7e0b8574c1e6ca0f8f39632b1c" style="width: 100.0%; height: 100.0%;">     <strong>Regina, Saskatchewan</strong><br>     Concentration Level: Medium<br>     Food CPI: 190.97391<br>     CR4: 55.3%<br>     HHI: 1094<br>     Year: 2024<br>     Population: 282,032<br></div>`)[0];
+                popup_6a39d0710098b63ffede856a46f149ea.setContent(html_28560b7e0b8574c1e6ca0f8f39632b1c);
+            
+        
+
+        polygon_eefaae45580d22336830a5c94e53f3ea.bindPopup(popup_6a39d0710098b63ffede856a46f149ea)
+        ;
+
+        
+    
+    
+            var marker_3e8632cac59c85fd91855abce7fc5732 = L.marker(
+                [50.529531, -104.586471],
+                {
+}
+            ).addTo(feature_group_f8ecc8dc5efc7174fe2696231baa6032);
+        
+    
+            var div_icon_ffbbbc6d8461cbddfd842cdfb6ae9fe5 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 10pt; color: black; background-color: white; border: 1px solid orange; border-radius: 8px; padding: 2px; text-align: center; font-weight: bold; opacity: 0.9;\"\u003e55.3%\u003c/div\u003e",
+  "iconSize": [90, 30],
+  "iconAnchor": [45, 15],
+  "className": "empty",
+});
+            marker_3e8632cac59c85fd91855abce7fc5732.setIcon(div_icon_ffbbbc6d8461cbddfd842cdfb6ae9fe5);
+        
+    
+                marker_3e8632cac59c85fd91855abce7fc5732.setIcon(div_icon_ffbbbc6d8461cbddfd842cdfb6ae9fe5);
+            
+    
+            var polygon_7ed1abe4521cad601d52901ce015d843 = L.polygon(
+                [[52.517788, -106.148059], [52.143831, -106.146938], [52.143828, -105.717333], [51.881661, -105.688084], [51.881677, -106.287926], [51.707095, -106.287593], [51.707015, -106.500201], [51.707063, -106.82218], [51.881586, -106.754575], [51.881692, -107.279612], [52.351585, -107.299432], [52.435056, -106.344039], [52.580216, -106.147808], [52.517788, -106.148059]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(feature_group_f8ecc8dc5efc7174fe2696231baa6032);
+        
+    
+        var popup_3d2a5b27c85a3d035258855675911fc0 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_a805d7e998668fda69c829e1c0ecc776 = $(`<div id="html_a805d7e998668fda69c829e1c0ecc776" style="width: 100.0%; height: 100.0%;">     <strong>Saskatoon, Saskatchewan</strong><br>     Concentration Level: Medium<br>     Food CPI: 188.32619<br>     CR4: 54.2%<br>     HHI: 1059<br>     Year: 2024<br>     Population: 367,336<br></div>`)[0];
+                popup_3d2a5b27c85a3d035258855675911fc0.setContent(html_a805d7e998668fda69c829e1c0ecc776);
+            
+        
+
+        polygon_7ed1abe4521cad601d52901ce015d843.bindPopup(popup_3d2a5b27c85a3d035258855675911fc0)
+        ;
+
+        
+    
+    
+            var marker_a5c03d44a5392a589e9690d801147a49 = L.marker(
+                [52.095563, -106.397989],
+                {
+}
+            ).addTo(feature_group_f8ecc8dc5efc7174fe2696231baa6032);
+        
+    
+            var div_icon_478be9d300f10b365e596aea16c5badb = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 10pt; color: black; background-color: white; border: 1px solid orange; border-radius: 8px; padding: 2px; text-align: center; font-weight: bold; opacity: 0.9;\"\u003e54.2%\u003c/div\u003e",
+  "iconSize": [90, 30],
+  "iconAnchor": [45, 15],
+  "className": "empty",
+});
+            marker_a5c03d44a5392a589e9690d801147a49.setIcon(div_icon_478be9d300f10b365e596aea16c5badb);
+        
+    
+                marker_a5c03d44a5392a589e9690d801147a49.setIcon(div_icon_478be9d300f10b365e596aea16c5badb);
+            
+    
+            var polygon_c042c65fe2bfa2447a8134a59e51ef27 = L.polygon(
+                [[48.735593, -88.548763], [48.644827, -88.533912], [48.565283, -88.636216], [48.466512, -89.166545], [48.399328, -89.195598], [48.399413, -89.044562], [48.267486, -89.110044], [48.246836, -89.0], [48.113221, -89.0], [47.974083, -89.337417], [48.010376, -89.70939], [48.552575, -89.763624], [48.514594, -89.182609], [48.603496, -89.187457], [48.605723, -88.800455], [48.737649, -88.779208], [48.735593, -88.548763]],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(feature_group_f8ecc8dc5efc7174fe2696231baa6032);
+        
+    
+        var popup_19c899dabd480ffadb912579b65e1acd = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_78950bb10b86c1f67b72cb600ce12b1c = $(`<div id="html_78950bb10b86c1f67b72cb600ce12b1c" style="width: 100.0%; height: 100.0%;">     <strong>Thunder Bay, Ontario</strong><br>     Concentration Level: High<br>     Food CPI: 189.95808<br>     CR4: 61.5%<br>     HHI: 1361<br>     Year: 2024<br>     Population: 133,063<br></div>`)[0];
+                popup_19c899dabd480ffadb912579b65e1acd.setContent(html_78950bb10b86c1f67b72cb600ce12b1c);
+            
+        
+
+        polygon_c042c65fe2bfa2447a8134a59e51ef27.bindPopup(popup_19c899dabd480ffadb912579b65e1acd)
+        ;
+
+        
+    
+    
+            var marker_5227c6768ab08e3a06296d91adf244cf = L.marker(
+                [48.445446, -89.032033],
+                {
+}
+            ).addTo(feature_group_f8ecc8dc5efc7174fe2696231baa6032);
+        
+    
+            var div_icon_45286e7af1c511e35ab85ffc4827bf9b = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 10pt; color: black; background-color: white; border: 1px solid red; border-radius: 8px; padding: 2px; text-align: center; font-weight: bold; opacity: 0.9;\"\u003e61.5%\u003c/div\u003e",
+  "iconSize": [90, 30],
+  "iconAnchor": [45, 15],
+  "className": "empty",
+});
+            marker_5227c6768ab08e3a06296d91adf244cf.setIcon(div_icon_45286e7af1c511e35ab85ffc4827bf9b);
+        
+    
+                marker_5227c6768ab08e3a06296d91adf244cf.setIcon(div_icon_45286e7af1c511e35ab85ffc4827bf9b);
+            
+    
+            var polygon_c68c24b9ed42d182e80f92977e7c7db9 = L.polygon(
+                [[49.548318, -122.959897], [49.541702, -122.608144], [49.462347, -122.526839], [49.353125, -122.603295], [49.352979, -122.409967], [49.002256, -122.459155], [49.002784, -123.357122], [49.205267, -123.488199], [49.312338, -123.738378], [49.307178, -123.474545], [49.481103, -123.274869], [49.548318, -122.959897]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(feature_group_f8ecc8dc5efc7174fe2696231baa6032);
+        
+    
+        var popup_8b1a35282e6b0035a0d0b726363b81ad = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_03e81e6ce2dfa2e418d561c3ba91e5b7 = $(`<div id="html_03e81e6ce2dfa2e418d561c3ba91e5b7" style="width: 100.0%; height: 100.0%;">     <strong>Vancouver, British Columbia</strong><br>     Concentration Level: Medium<br>     Food CPI: 186.87352<br>     CR4: 41.7%<br>     HHI: 578<br>     Year: 2024<br>     Population: 3,108,941<br></div>`)[0];
+                popup_8b1a35282e6b0035a0d0b726363b81ad.setContent(html_03e81e6ce2dfa2e418d561c3ba91e5b7);
+            
+        
+
+        polygon_c68c24b9ed42d182e80f92977e7c7db9.bindPopup(popup_8b1a35282e6b0035a0d0b726363b81ad)
+        ;
+
+        
+    
+    
+            var marker_e37a38181353024b9d599b09dbe5e802 = L.marker(
+                [49.343143, -122.988359],
+                {
+}
+            ).addTo(feature_group_f8ecc8dc5efc7174fe2696231baa6032);
+        
+    
+            var div_icon_df18983c5bc722f54d443a88232df36d = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 10pt; color: black; background-color: white; border: 1px solid orange; border-radius: 8px; padding: 2px; text-align: center; font-weight: bold; opacity: 0.9;\"\u003e41.7%\u003c/div\u003e",
+  "iconSize": [90, 30],
+  "iconAnchor": [45, 15],
+  "className": "empty",
+});
+            marker_e37a38181353024b9d599b09dbe5e802.setIcon(div_icon_df18983c5bc722f54d443a88232df36d);
+        
+    
+                marker_e37a38181353024b9d599b09dbe5e802.setIcon(div_icon_df18983c5bc722f54d443a88232df36d);
+            
+    
+            var polygon_c6d109ce1c4079d42a3e732a46440926 = L.polygon(
+                [[48.690547, -123.400638], [48.513647, -123.360731], [48.423118, -123.113809], [48.25, -123.25], [48.252836, -123.755679], [48.343791, -124.132037], [48.43069, -124.05146], [48.418939, -123.744944], [48.500806, -123.750658], [48.535694, -123.544944], [48.654495, -123.447254], [48.691386, -123.489137], [48.690547, -123.400638]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(feature_group_f8ecc8dc5efc7174fe2696231baa6032);
+        
+    
+        var popup_3a6144d45bad2c734aac9eaad8dec49b = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_c869dc89f11d94a3169625a601eefb94 = $(`<div id="html_c869dc89f11d94a3169625a601eefb94" style="width: 100.0%; height: 100.0%;">     <strong>Victoria, British Columbia</strong><br>     Concentration Level: Medium<br>     Food CPI: 173.91344<br>     CR4: 43.5%<br>     HHI: 760<br>     Year: 2024<br>     Population: 441,491<br></div>`)[0];
+                popup_3a6144d45bad2c734aac9eaad8dec49b.setContent(html_c869dc89f11d94a3169625a601eefb94);
+            
+        
+
+        polygon_c6d109ce1c4079d42a3e732a46440926.bindPopup(popup_3a6144d45bad2c734aac9eaad8dec49b)
+        ;
+
+        
+    
+    
+            var marker_c1e363471ef58e54c61f6acb03cceb7d = L.marker(
+                [48.492038, -123.572456],
+                {
+}
+            ).addTo(feature_group_f8ecc8dc5efc7174fe2696231baa6032);
+        
+    
+            var div_icon_634aaef5b43dcbb887cb30e31f1a1861 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 10pt; color: black; background-color: white; border: 1px solid orange; border-radius: 8px; padding: 2px; text-align: center; font-weight: bold; opacity: 0.9;\"\u003e43.5%\u003c/div\u003e",
+  "iconSize": [90, 30],
+  "iconAnchor": [45, 15],
+  "className": "empty",
+});
+            marker_c1e363471ef58e54c61f6acb03cceb7d.setIcon(div_icon_634aaef5b43dcbb887cb30e31f1a1861);
+        
+    
+                marker_c1e363471ef58e54c61f6acb03cceb7d.setIcon(div_icon_634aaef5b43dcbb887cb30e31f1a1861);
+            
+    
+            var polygon_11f9485941285bab860052c4c0fc90b4 = L.polygon(
+                [[61.240107, -134.957735], [61.137717, -134.731947], [60.938928, -134.656421], [60.511673, -133.88279], [60.290894, -134.419564], [60.193604, -134.986138], [60.000013, -134.986228], [60.000059, -135.598022], [60.55604, -135.486103], [60.814645, -136.02363], [61.018334, -135.902446], [61.231329, -135.550578], [61.240107, -134.957735]],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(feature_group_f8ecc8dc5efc7174fe2696231baa6032);
+        
+    
+        var popup_866992891fc4b453c782105af91bc680 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_23522c3d99723310bcc30c5c4355d13f = $(`<div id="html_23522c3d99723310bcc30c5c4355d13f" style="width: 100.0%; height: 100.0%;">     <strong>Whitehorse, Yukon</strong><br>     Concentration Level: High<br>     Food CPI: 164.8<br>     CR4: 71.4%<br>     HHI: 1837<br>     Year: 2024<br>     Population: 38,000<br></div>`)[0];
+                popup_866992891fc4b453c782105af91bc680.setContent(html_23522c3d99723310bcc30c5c4355d13f);
+            
+        
+
+        polygon_11f9485941285bab860052c4c0fc90b4.bindPopup(popup_866992891fc4b453c782105af91bc680)
+        ;
+
+        
+    
+    
+            var marker_6adc74a82f4221442cc8066ff0c05384 = L.marker(
+                [60.70565, -135.087641],
+                {
+}
+            ).addTo(feature_group_f8ecc8dc5efc7174fe2696231baa6032);
+        
+    
+            var div_icon_291db4015741be5fa2aa195b73e931b9 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 10pt; color: black; background-color: white; border: 1px solid red; border-radius: 8px; padding: 2px; text-align: center; font-weight: bold; opacity: 0.9;\"\u003e71.4%\u003c/div\u003e",
+  "iconSize": [90, 30],
+  "iconAnchor": [45, 15],
+  "className": "empty",
+});
+            marker_6adc74a82f4221442cc8066ff0c05384.setIcon(div_icon_291db4015741be5fa2aa195b73e931b9);
+        
+    
+                marker_6adc74a82f4221442cc8066ff0c05384.setIcon(div_icon_291db4015741be5fa2aa195b73e931b9);
+            
+    
+            var polygon_7fb48b07bfd6a55da811cd502fc4750b = L.polygon(
+                [[50.545119, -96.599955], [50.282707, -96.352955], [50.283652, -96.628256], [50.069446, -96.71661], [50.061962, -96.635535], [49.973243, -96.636512], [49.972946, -96.360979], [49.707271, -96.367173], [49.708512, -96.775857], [49.619438, -96.775498], [49.620679, -97.048811], [49.531674, -97.048633], [49.532393, -97.732456], [49.798444, -97.732333], [49.798145, -97.459062], [49.87163, -97.447853], [50.076801, -97.947371], [50.033054, -97.006617], [50.128858, -96.855607], [50.400455, -96.872714], [50.396147, -96.651419], [50.451252, -96.572772], [50.545119, -96.599955]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(feature_group_f8ecc8dc5efc7174fe2696231baa6032);
+        
+    
+        var popup_6d6e7ce1d63443e0af63f3d8081b80a9 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_d215bcb0ccc36c8f33e8b6d7739e9f09 = $(`<div id="html_d215bcb0ccc36c8f33e8b6d7739e9f09" style="width: 100.0%; height: 100.0%;">     <strong>Winnipeg, Manitoba</strong><br>     Concentration Level: Medium<br>     Food CPI: 187.05086<br>     CR4: 49.1%<br>     HHI: 1143<br>     Year: 2024<br>     Population: 941,641<br></div>`)[0];
+                popup_6d6e7ce1d63443e0af63f3d8081b80a9.setContent(html_d215bcb0ccc36c8f33e8b6d7739e9f09);
+            
+        
+
+        polygon_7fb48b07bfd6a55da811cd502fc4750b.bindPopup(popup_6d6e7ce1d63443e0af63f3d8081b80a9)
+        ;
+
+        
+    
+    
+            var marker_150c7667872849c147a1d5c3edc8f856 = L.marker(
+                [50.01778, -96.905432],
+                {
+}
+            ).addTo(feature_group_f8ecc8dc5efc7174fe2696231baa6032);
+        
+    
+            var div_icon_62000efcedd6fcf011cc4658f4eea5f8 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 10pt; color: black; background-color: white; border: 1px solid orange; border-radius: 8px; padding: 2px; text-align: center; font-weight: bold; opacity: 0.9;\"\u003e49.1%\u003c/div\u003e",
+  "iconSize": [90, 30],
+  "iconAnchor": [45, 15],
+  "className": "empty",
+});
+            marker_150c7667872849c147a1d5c3edc8f856.setIcon(div_icon_62000efcedd6fcf011cc4658f4eea5f8);
+        
+    
+                marker_150c7667872849c147a1d5c3edc8f856.setIcon(div_icon_62000efcedd6fcf011cc4658f4eea5f8);
+            
+    
+            var polygon_fd5347d899f8b5b8dfda16fec31674d4 = L.polygon(
+                [[62.539303, -114.299689], [62.408563, -114.333265], [62.408513, -114.518312], [62.499579, -114.517931], [62.539303, -114.299689]],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(feature_group_f8ecc8dc5efc7174fe2696231baa6032);
+        
+    
+        var popup_19a7148bb3e019ed14e915514999e6a9 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_d00ba4dd66561d13d02d92cad7588e34 = $(`<div id="html_d00ba4dd66561d13d02d92cad7588e34" style="width: 100.0%; height: 100.0%;">     <strong>Yellowknife, Northwest Territories</strong><br>     Concentration Level: High<br>     Food CPI: 176.09999<br>     CR4: 61.2%<br>     HHI: 2294<br>     Year: 2023<br>     Population: 22,481<br></div>`)[0];
+                popup_19a7148bb3e019ed14e915514999e6a9.setContent(html_d00ba4dd66561d13d02d92cad7588e34);
+            
+        
+
+        polygon_fd5347d899f8b5b8dfda16fec31674d4.bindPopup(popup_19a7148bb3e019ed14e915514999e6a9)
+        ;
+
+        
+    
+    
+            var marker_0cdb0b937eae4afc640e38eb88ef6937 = L.marker(
+                [62.479052, -114.393777],
+                {
+}
+            ).addTo(feature_group_f8ecc8dc5efc7174fe2696231baa6032);
+        
+    
+            var div_icon_8a9fa767772aa0eded5d42340ba8c2d5 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 10pt; color: black; background-color: white; border: 1px solid red; border-radius: 8px; padding: 2px; text-align: center; font-weight: bold; opacity: 0.9;\"\u003e61.2%\u003c/div\u003e",
+  "iconSize": [90, 30],
+  "iconAnchor": [45, 15],
+  "className": "empty",
+});
+            marker_0cdb0b937eae4afc640e38eb88ef6937.setIcon(div_icon_8a9fa767772aa0eded5d42340ba8c2d5);
+        
+    
+                marker_0cdb0b937eae4afc640e38eb88ef6937.setIcon(div_icon_8a9fa767772aa0eded5d42340ba8c2d5);
+            
+    
+            feature_group_f8ecc8dc5efc7174fe2696231baa6032.addTo(map_18fcea7c4acc96fee7219a8acd564625);
+        
+    
+            var feature_group_a1745a370b752668d3588848476e8669 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var polygon_8e512613950f39265a02b887e3426092 = L.polygon(
+                [[46.410878, -62.815875], [46.282599, -62.743371], [46.270546, -62.920711], [46.150219, -62.998123], [46.236888, -62.977432], [46.206406, -63.055105], [46.015205, -63.146209], [46.068211, -63.3307], [46.266294, -63.403076], [46.301534, -63.359945], [46.272726, -63.27864], [46.294106, -63.236645], [46.400659, -63.494459], [46.486615, -63.250906], [46.410878, -62.815875]],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(feature_group_a1745a370b752668d3588848476e8669);
+        
+    
+        var popup_a9b48a916b7ec737ae0dcfce1319a730 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_897974253edb509fb4458c4fb7a8a117 = $(`<div id="html_897974253edb509fb4458c4fb7a8a117" style="width: 100.0%; height: 100.0%;">     <strong>Charlottetown and Summerside, Prince Edward Island</strong><br>     Concentration Level: High<br>     Food CPI: 214.19809<br>     CR4: 90.9%<br>     HHI: 2893<br>     Year: 2024<br>     Population: 114,266<br></div>`)[0];
+                popup_a9b48a916b7ec737ae0dcfce1319a730.setContent(html_897974253edb509fb4458c4fb7a8a117);
+            
+        
+
+        polygon_8e512613950f39265a02b887e3426092.bindPopup(popup_a9b48a916b7ec737ae0dcfce1319a730)
+        ;
+
+        
+    
+    
+            var marker_e0860b1de5737d9c5cfed0a040a3363a = L.marker(
+                [46.271584, -63.121805],
+                {
+}
+            ).addTo(feature_group_a1745a370b752668d3588848476e8669);
+        
+    
+            var div_icon_d3cdd83ed7240fd43ec668e93ca88d5e = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 10pt; color: black; background-color: white; border: 1px solid red; border-radius: 8px; padding: 2px; text-align: center; font-weight: bold; opacity: 0.9;\"\u003e90.9%\u003c/div\u003e",
+  "iconSize": [90, 30],
+  "iconAnchor": [45, 15],
+  "className": "empty",
+});
+            marker_e0860b1de5737d9c5cfed0a040a3363a.setIcon(div_icon_d3cdd83ed7240fd43ec668e93ca88d5e);
+        
+    
+                marker_e0860b1de5737d9c5cfed0a040a3363a.setIcon(div_icon_d3cdd83ed7240fd43ec668e93ca88d5e);
+            
+    
+            var polygon_66c14dee02c71a4395c1835b363de2fd = L.polygon(
+                [[44.5728609, -64.0103622], [44.6354368, -64.2810296], [44.7233202, -64.0474796], [44.7330768, -64.0474411], [44.9356407, -63.9623754], [44.9395292, -63.9485179], [45.2265462, -64.1738429], [45.3521452, -63.5583209], [45.0444187, -63.4044404], [45.4370083, -62.3968506], [44.937585, -61.5179443], [44.53959, -63.3416748], [44.3474223, -63.5668945], [44.370987, -63.8580322], [44.3749135, -63.8635254], [44.5709043, -63.9953613], [44.5709043, -63.9898682], [44.5728609, -64.0103622]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(feature_group_a1745a370b752668d3588848476e8669);
+        
+    
+        var popup_50651cb48bce3d64093d93bc8762d2ef = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_15eb250da5c3daec7022854290b44519 = $(`<div id="html_15eb250da5c3daec7022854290b44519" style="width: 100.0%; height: 100.0%;">     <strong>Halifax, Nova Scotia</strong><br>     Concentration Level: Medium<br>     Food CPI: 194.5074<br>     CR4: 57.1%<br>     HHI: 1400<br>     Year: 2024<br>     Population: 530,167<br></div>`)[0];
+                popup_50651cb48bce3d64093d93bc8762d2ef.setContent(html_15eb250da5c3daec7022854290b44519);
+            
+        
+
+        polygon_66c14dee02c71a4395c1835b363de2fd.bindPopup(popup_50651cb48bce3d64093d93bc8762d2ef)
+        ;
+
+        
+    
+    
+            var marker_e43715504be102002b699bb4831ba363 = L.marker(
+                [44.8040068, -63.6595109],
+                {
+}
+            ).addTo(feature_group_a1745a370b752668d3588848476e8669);
+        
+    
+            var div_icon_2d9e7aacd48c42ff706bbddceeb8667c = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 10pt; color: black; background-color: white; border: 1px solid orange; border-radius: 8px; padding: 2px; text-align: center; font-weight: bold; opacity: 0.9;\"\u003e57.1%\u003c/div\u003e",
+  "iconSize": [90, 30],
+  "iconAnchor": [45, 15],
+  "className": "empty",
+});
+            marker_e43715504be102002b699bb4831ba363.setIcon(div_icon_2d9e7aacd48c42ff706bbddceeb8667c);
+        
+    
+                marker_e43715504be102002b699bb4831ba363.setIcon(div_icon_2d9e7aacd48c42ff706bbddceeb8667c);
+            
+    
+            var polygon_9ba4c6aedc0e062bc94f92fbbdcf8fc8 = L.polygon(
+                [[45.948676, -73.32297], [45.892226, -73.240442], [45.813628, -73.308807], [45.654537, -73.268163], [45.589228, -73.130197], [45.51068, -73.196371], [45.25354, -73.190749], [45.254876, -73.411444], [45.328904, -73.408428], [45.314696, -73.633996], [45.229005, -73.698212], [45.313736, -73.811289], [45.2415, -73.843571], [45.255981, -73.951245], [45.318569, -73.97608], [45.242757, -74.319544], [45.352428, -74.168903], [45.523267, -74.279882], [45.705076, -74.203912], [45.738786, -74.327969], [45.824053, -74.310119], [45.78079, -74.120067], [45.850461, -74.067746], [45.766051, -73.912021], [45.82084, -73.806775], [45.8854, -73.901604], [45.911966, -73.776026], [45.832691, -73.67376], [45.948676, -73.32297]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(feature_group_a1745a370b752668d3588848476e8669);
+        
+    
+        var popup_1b07e8319720cdbde29fbe938f805749 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_dc7ff0c75ff09418e1296f436315fef4 = $(`<div id="html_dc7ff0c75ff09418e1296f436315fef4" style="width: 100.0%; height: 100.0%;">     <strong>Montréal, Quebec</strong><br>     Concentration Level: Medium<br>     Food CPI: 185.01105<br>     CR4: 53.4%<br>     HHI: 895<br>     Year: 2024<br>     Population: 4,615,154<br></div>`)[0];
+                popup_1b07e8319720cdbde29fbe938f805749.setContent(html_dc7ff0c75ff09418e1296f436315fef4);
+            
+        
+
+        polygon_9ba4c6aedc0e062bc94f92fbbdcf8fc8.bindPopup(popup_1b07e8319720cdbde29fbe938f805749)
+        ;
+
+        
+    
+    
+            var marker_c45839a4a313762c743e05ab46996041 = L.marker(
+                [45.589759, -73.74425],
+                {
+}
+            ).addTo(feature_group_a1745a370b752668d3588848476e8669);
+        
+    
+            var div_icon_02ea69d3aa356ee89f14c7239be59dcb = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 10pt; color: black; background-color: white; border: 1px solid orange; border-radius: 8px; padding: 2px; text-align: center; font-weight: bold; opacity: 0.9;\"\u003e53.4%\u003c/div\u003e",
+  "iconSize": [90, 30],
+  "iconAnchor": [45, 15],
+  "className": "empty",
+});
+            marker_c45839a4a313762c743e05ab46996041.setIcon(div_icon_02ea69d3aa356ee89f14c7239be59dcb);
+        
+    
+                marker_c45839a4a313762c743e05ab46996041.setIcon(div_icon_02ea69d3aa356ee89f14c7239be59dcb);
+            
+    
+            var polygon_13c3c14e998c201b0662453f4623f2bc = L.polygon(
+                [[45.57771, -75.177176], [45.410568, -75.07954], [45.357798, -75.267874], [45.239742, -75.201156], [45.084506, -75.594904], [44.956511, -75.485604], [44.845648, -75.695785], [45.072398, -75.953128], [44.983032, -76.095092], [45.419021, -76.642778], [45.516326, -76.497714], [45.456674, -76.324617], [45.518181, -76.140399], [45.372699, -75.817825], [45.57771, -75.177176]],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(feature_group_a1745a370b752668d3588848476e8669);
+        
+    
+        var popup_caecb74e6d9e5e4ffd875a1e802d7d49 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_2cf50955b9891edfd4084f700cbaed58 = $(`<div id="html_2cf50955b9891edfd4084f700cbaed58" style="width: 100.0%; height: 100.0%;">     <strong>Ottawa-Gatineau, Ontario part, Ontario/Quebec</strong><br>     Concentration Level: High<br>     Food CPI: 171.82697<br>     CR4: 75.2%<br>     HHI: 1637<br>     Year: 2024<br>     Population: 1,287,592<br></div>`)[0];
+                popup_caecb74e6d9e5e4ffd875a1e802d7d49.setContent(html_2cf50955b9891edfd4084f700cbaed58);
+            
+        
+
+        polygon_13c3c14e998c201b0662453f4623f2bc.bindPopup(popup_caecb74e6d9e5e4ffd875a1e802d7d49)
+        ;
+
+        
+    
+    
+            var marker_471aa980b96b2a2aec85956550c245b5 = L.marker(
+                [45.292568, -75.743385],
+                {
+}
+            ).addTo(feature_group_a1745a370b752668d3588848476e8669);
+        
+    
+            var div_icon_3c42ef4c5a64bf1fa7b0032fe55f52ac = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 10pt; color: black; background-color: white; border: 1px solid red; border-radius: 8px; padding: 2px; text-align: center; font-weight: bold; opacity: 0.9;\"\u003e75.2%\u003c/div\u003e",
+  "iconSize": [90, 30],
+  "iconAnchor": [45, 15],
+  "className": "empty",
+});
+            marker_471aa980b96b2a2aec85956550c245b5.setIcon(div_icon_3c42ef4c5a64bf1fa7b0032fe55f52ac);
+        
+    
+                marker_471aa980b96b2a2aec85956550c245b5.setIcon(div_icon_3c42ef4c5a64bf1fa7b0032fe55f52ac);
+            
+    
+            var polygon_e6ec8a6f53acad54c4dd7c0a9b33c9ed = L.polygon(
+                [[47.159579, -71.257275], [47.142006, -71.071353], [46.999144, -70.952406], [47.035096, -70.690477], [46.865673, -70.966048], [46.821608, -70.92414], [46.759054, -71.031726], [46.699291, -70.947933], [46.535753, -71.192597], [46.608539, -71.384698], [46.561387, -71.562049], [46.721512, -71.711227], [46.784184, -71.553104], [46.853987, -71.71476], [46.98693, -71.632712], [47.112259, -71.814619], [47.307313, -71.41258], [47.159579, -71.257275]],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(feature_group_a1745a370b752668d3588848476e8669);
+        
+    
+        var popup_f617bf46850e7af71c353f71dfae4ccd = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_f175ced0d7ee4d24b1de4698b4fde9ff = $(`<div id="html_f175ced0d7ee4d24b1de4698b4fde9ff" style="width: 100.0%; height: 100.0%;">     <strong>Québec, Quebec</strong><br>     Concentration Level: High<br>     Food CPI: 178.6651<br>     CR4: 72.6%<br>     HHI: 1684<br>     Year: 2024<br>     Population: 900,343<br></div>`)[0];
+                popup_f617bf46850e7af71c353f71dfae4ccd.setContent(html_f175ced0d7ee4d24b1de4698b4fde9ff);
+            
+        
+
+        polygon_e6ec8a6f53acad54c4dd7c0a9b33c9ed.bindPopup(popup_f617bf46850e7af71c353f71dfae4ccd)
+        ;
+
+        
+    
+    
+            var marker_6029e810545a6b03cacceae3773a7bc8 = L.marker(
+                [46.895161, -71.282054],
+                {
+}
+            ).addTo(feature_group_a1745a370b752668d3588848476e8669);
+        
+    
+            var div_icon_623a91e5c1bb0b8925cabff2a5d054a1 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 10pt; color: black; background-color: white; border: 1px solid red; border-radius: 8px; padding: 2px; text-align: center; font-weight: bold; opacity: 0.9;\"\u003e72.6%\u003c/div\u003e",
+  "iconSize": [90, 30],
+  "iconAnchor": [45, 15],
+  "className": "empty",
+});
+            marker_6029e810545a6b03cacceae3773a7bc8.setIcon(div_icon_623a91e5c1bb0b8925cabff2a5d054a1);
+        
+    
+                marker_6029e810545a6b03cacceae3773a7bc8.setIcon(div_icon_623a91e5c1bb0b8925cabff2a5d054a1);
+            
+    
+            var polygon_f6653c6f032b7e1c07a309b370737975 = L.polygon(
+                [[45.477118, -65.229646], [45.289672, -65.50073], [45.211766, -66.091117], [44.972886, -66.558491], [45.312787, -66.593037], [45.312733, -66.459743], [45.497225, -66.460244], [45.4988, -66.563461], [45.692173, -66.395512], [45.522938, -66.166189], [45.658717, -65.751261], [45.589286, -65.590355], [45.48457, -65.551093], [45.61509, -65.119355], [45.51329, -65.076815], [45.477118, -65.229646]],
+                {"bubblingMouseEvents": true, "color": "red", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "red", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(feature_group_a1745a370b752668d3588848476e8669);
+        
+    
+        var popup_7eb1de6b024281ff6f192e13dd8a084d = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_b98976e7702577ec29f686bca229c799 = $(`<div id="html_b98976e7702577ec29f686bca229c799" style="width: 100.0%; height: 100.0%;">     <strong>Saint John, New Brunswick</strong><br>     Concentration Level: High<br>     Food CPI: 200.91891<br>     CR4: 80.5%<br>     HHI: 2553<br>     Year: 2024<br>     Population: 142,433<br></div>`)[0];
+                popup_7eb1de6b024281ff6f192e13dd8a084d.setContent(html_b98976e7702577ec29f686bca229c799);
+            
+        
+
+        polygon_f6653c6f032b7e1c07a309b370737975.bindPopup(popup_7eb1de6b024281ff6f192e13dd8a084d)
+        ;
+
+        
+    
+    
+            var marker_66c85789da36fda1e2026d1ee6c06c67 = L.marker(
+                [45.445386, -65.896043],
+                {
+}
+            ).addTo(feature_group_a1745a370b752668d3588848476e8669);
+        
+    
+            var div_icon_8fc5f0ac1eedbe94d6eb1403b7ff4878 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 10pt; color: black; background-color: white; border: 1px solid red; border-radius: 8px; padding: 2px; text-align: center; font-weight: bold; opacity: 0.9;\"\u003e80.5%\u003c/div\u003e",
+  "iconSize": [90, 30],
+  "iconAnchor": [45, 15],
+  "className": "empty",
+});
+            marker_66c85789da36fda1e2026d1ee6c06c67.setIcon(div_icon_8fc5f0ac1eedbe94d6eb1403b7ff4878);
+        
+    
+                marker_66c85789da36fda1e2026d1ee6c06c67.setIcon(div_icon_8fc5f0ac1eedbe94d6eb1403b7ff4878);
+            
+    
+            var polygon_724da3a51bcc7cff570215991dda4539 = L.polygon(
+                [[47.809609, -52.785427], [47.647657, -52.660157], [47.530579, -52.690211], [47.523294, -52.619366], [47.309092, -52.747482], [47.317185, -52.813717], [47.239341, -52.752703], [47.266778, -52.853723], [47.381079, -52.82829], [47.450269, -53.031699], [47.291174, -53.125468], [47.281568, -53.245295], [47.546558, -52.920419], [47.809609, -52.785427]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(feature_group_a1745a370b752668d3588848476e8669);
+        
+    
+        var popup_96cdc5a4493f3c4890a78326065c639a = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_f108eb24566769d75d7fe999b1a4831b = $(`<div id="html_f108eb24566769d75d7fe999b1a4831b" style="width: 100.0%; height: 100.0%;">     <strong>St. John's, Newfoundland and Labrador</strong><br>     Concentration Level: Medium<br>     Food CPI: 189.0544<br>     CR4: 59.4%<br>     HHI: 1367<br>     Year: 2024<br>     Population: 239,316<br></div>`)[0];
+                popup_96cdc5a4493f3c4890a78326065c639a.setContent(html_f108eb24566769d75d7fe999b1a4831b);
+            
+        
+
+        polygon_724da3a51bcc7cff570215991dda4539.bindPopup(popup_96cdc5a4493f3c4890a78326065c639a)
+        ;
+
+        
+    
+    
+            var marker_8f180e03d0d7af2d223cecfe9ea41ec2 = L.marker(
+                [47.457414, -52.847099],
+                {
+}
+            ).addTo(feature_group_a1745a370b752668d3588848476e8669);
+        
+    
+            var div_icon_4e002292c731abd0bd0030fa97939c29 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 10pt; color: black; background-color: white; border: 1px solid orange; border-radius: 8px; padding: 2px; text-align: center; font-weight: bold; opacity: 0.9;\"\u003e59.4%\u003c/div\u003e",
+  "iconSize": [90, 30],
+  "iconAnchor": [45, 15],
+  "className": "empty",
+});
+            marker_8f180e03d0d7af2d223cecfe9ea41ec2.setIcon(div_icon_4e002292c731abd0bd0030fa97939c29);
+        
+    
+                marker_8f180e03d0d7af2d223cecfe9ea41ec2.setIcon(div_icon_4e002292c731abd0bd0030fa97939c29);
+            
+    
+            var polygon_b50431f715e0907a5137b366ae26a206 = L.polygon(
+                [[44.453881, -79.249781], [43.833504, -78.970507], [43.610809, -79.34374], [43.633161, -79.467339], [43.368931, -79.720352], [43.476542, -79.894724], [43.417252, -79.959305], [43.561107, -80.160356], [43.734451, -79.969035], [43.864695, -80.14411], [44.084928, -80.171741], [44.123249, -79.993964], [43.951423, -79.951176], [43.977036, -79.833582], [44.165329, -79.891846], [44.210111, -79.512654], [44.422367, -79.508978], [44.453881, -79.249781]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.4, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 1}
+            ).addTo(feature_group_a1745a370b752668d3588848476e8669);
+        
+    
+        var popup_738b2873479fa3318857dd865aa9a61f = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_8cd2d28685c20c1ed0ec6c54abf29cda = $(`<div id="html_8cd2d28685c20c1ed0ec6c54abf29cda" style="width: 100.0%; height: 100.0%;">     <strong>Toronto, Ontario</strong><br>     Concentration Level: Medium<br>     Food CPI: 206.38557<br>     CR4: 46.7%<br>     HHI: 665<br>     Year: 2024<br>     Population: 7,106,379<br></div>`)[0];
+                popup_738b2873479fa3318857dd865aa9a61f.setContent(html_8cd2d28685c20c1ed0ec6c54abf29cda);
+            
+        
+
+        polygon_b50431f715e0907a5137b366ae26a206.bindPopup(popup_738b2873479fa3318857dd865aa9a61f)
+        ;
+
+        
+    
+    
+            var marker_4e995666f723f17d7e96cffbdaec2cb0 = L.marker(
+                [43.907925, -79.721832],
+                {
+}
+            ).addTo(feature_group_a1745a370b752668d3588848476e8669);
+        
+    
+            var div_icon_790057201bddcc3751b2e3ae74ff9e51 = L.divIcon({
+  "html": "\u003cdiv style=\"font-size: 10pt; color: black; background-color: white; border: 1px solid orange; border-radius: 8px; padding: 2px; text-align: center; font-weight: bold; opacity: 0.9;\"\u003e46.7%\u003c/div\u003e",
+  "iconSize": [90, 30],
+  "iconAnchor": [45, 15],
+  "className": "empty",
+});
+            marker_4e995666f723f17d7e96cffbdaec2cb0.setIcon(div_icon_790057201bddcc3751b2e3ae74ff9e51);
+        
+    
+                marker_4e995666f723f17d7e96cffbdaec2cb0.setIcon(div_icon_790057201bddcc3751b2e3ae74ff9e51);
+            
+    
+            feature_group_a1745a370b752668d3588848476e8669.addTo(map_18fcea7c4acc96fee7219a8acd564625);
+        
+    
+            var layer_control_b2d0f5c1b8977477704c917faf871029_layers = {
+                base_layers : {
+                    "cartodbpositron" : tile_layer_5310c78ec1f3d0e9640bbe88e8659939,
+                },
+                overlays :  {
+                    "Western Canada" : feature_group_f8ecc8dc5efc7174fe2696231baa6032,
+                    "Eastern Canada" : feature_group_a1745a370b752668d3588848476e8669,
+                },
+            };
+            let layer_control_b2d0f5c1b8977477704c917faf871029 = L.control.layers(
+                layer_control_b2d0f5c1b8977477704c917faf871029_layers.base_layers,
+                layer_control_b2d0f5c1b8977477704c917faf871029_layers.overlays,
+                {
+  "position": "topright",
+  "collapsed": true,
+  "autoZIndex": true,
+}
+            ).addTo(map_18fcea7c4acc96fee7219a8acd564625);
+
+        
+</script>
+</html>
